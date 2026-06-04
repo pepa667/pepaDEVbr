@@ -15,7 +15,13 @@
 /* Global page colors */
 .theme-phosphor body,
 .theme-phosphor .page-content,
-.theme-phosphor .home {
+.theme-phosphor .home,
+.theme-phosphor h1,
+.theme-phosphor h2,
+.theme-phosphor h3,
+.theme-phosphor h4,
+.theme-phosphor h5,
+.theme-phosphor h6 {
   background-color: var(--phosphor-bg) !important;
   color: var(--phosphor-text) !important;
 }
@@ -23,7 +29,8 @@
 /* Headings / links */
 .theme-phosphor a,
 .theme-phosphor .page-heading,
-.theme-phosphor .project-title {
+.theme-phosphor .project-title,
+.theme-phosphor .grey {
   color: var(--phosphor-accent) !important;
 }
 
