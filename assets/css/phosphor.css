@@ -1,0 +1,65 @@
+/* Phosphor theme — variables and main overrides
+   Apply the class `theme-phosphor` on the root element to enable.
+*/
+
+:root.theme-phosphor {
+  --phosphor-bg: #051805;
+  --phosphor-surface: #1d301d;
+  --phosphor-text: #74cf7d;
+  --phosphor-muted: #5b8a66;
+  --phosphor-accent: #39ff14;
+  --phosphor-link: #39ff14;
+  --phosphor-border: rgba(57, 255, 20, 0.12);
+}
+
+/* Global page colors */
+.theme-phosphor body,
+.theme-phosphor .page-content,
+.theme-phosphor .home {
+  background-color: var(--phosphor-bg) !important;
+  color: var(--phosphor-text) !important;
+}
+
+/* Headings / links */
+.theme-phosphor a,
+.theme-phosphor .page-heading,
+.theme-phosphor .project-title {
+  color: var(--phosphor-accent) !important;
+}
+
+/* Project cards */
+.theme-phosphor .project-card {
+  background: var(--phosphor-surface) !important;
+  border: 1px solid var(--phosphor-border) !important;
+  color: var(--phosphor-text) !important;
+}
+
+/* Muted text */
+.theme-phosphor .project-meta,
+.theme-phosphor .project-desc {
+  color: var(--phosphor-muted) !important;
+}
+
+/* Code / pre */
+.theme-phosphor pre,
+.theme-phosphor code {
+  background: rgba(0,0,0,0.6) !important;
+  color: var(--phosphor-text) !important;
+}
+
+/* Utility: inversions for images or contrast heavy elements */
+.theme-phosphor img.invert-for-phosphor {
+  filter: brightness(0.9) contrast(1.05) saturate(0.6);
+}
+
+/* End of phosphor theme */
+
+.layer-mobile {
+
+  background-image: url("/assets/images/mob-retro-small.png");
+
+}
+
+.grey {
+  background-color: var(--phosphor-surface);
+}

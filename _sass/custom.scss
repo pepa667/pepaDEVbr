@@ -167,22 +167,22 @@
   margin-left: auto;
 }
 
-@media (prefers-color-scheme: light) {
-  /* Light mode overrides */
-  .project-card {
-    background: rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-  }
+// @media (prefers-color-scheme: light) {
+//   /* Light mode overrides */
+//   .project-card {
+//     background: rgba(0, 0, 0, 0.02);
+//     border: 1px solid rgba(0, 0, 0, 0.06);
+//   }
 
-  .project-desc {
-    color: rgba(0, 0, 0, 0.8);
-  }
+//   .project-desc {
+//     color: rgba(0, 0, 0, 0.8);
+//   }
 
-  .project-meta {
-    color: rgba(0, 0, 0, 0.6);
-  }
+//   .project-meta {
+//     color: rgba(0, 0, 0, 0.6);
+//   }
 
-  .project-meta .lang {
-    background: rgba(0, 0, 0, 0.03);
-  }
-}
+//   .project-meta .lang {
+//     background: rgba(0, 0, 0, 0.03);
+//   }
+// }
