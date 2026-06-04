@@ -1,55 +1,102 @@
-
-
+/* --- Custom styles for the portfolio page --- */
 
 .parallax-container {
-  width: 100svw;
-  max-width: 100svw;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50svw;
-  margin-right: -50svw;
-}
-.parallax-container {
-  aspect-ratio: 25/10; /* Ajuste conforme necessário */
-  height: auto; /* Ou a altura do seu header */
-  perspective: 10px; /* Define o ponto de fuga */
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
-}
-
-.parallax-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 80svh;
+  overflow-block: clip;
 }
 
-/* Camada mais distante (fundo) */
-.layer-back {
-  transform: translateZ(-20px) scale(3); 
-  z-index: 1;
+.parallax-container > * {
+  position: absolute;
+  inset: 0;
+  display: none;
+  animation: parallax linear both;
+  animation-timeline: scroll();
+  width: 100%;
+  height: full;
+  background-size: fill;
+  background-position: top center;
 }
 
-/* Camada intermediária */
-.layer-mid {
-  transform: translateZ(-10px) scale(2);
-  z-index: 2;
+.layer-mobile {
+  aspect-ratio: 600 / 1308;
+  width: 100%;
+  height: auto;
+  display: block;
+  background-image: url("/assets/images/mobile.png");
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  --parallax-speed: 100;
 }
 
-/* Camada mais próxima (personagem/foreground) */
-.layer-front {
-  transform: translateZ(0) scale(1);
-  z-index: 3;
+@keyframes parallax {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@media (min-width: 800px) {
+  .parallax-container {
+    position: relative;
+    max-width: 90svw;
+    width: 90svw;
+    max-height: 90svh;
+    height: clamp(33svh, auto, 90svh);
+    left: clamp(-50vw, calc((90svw - 800px) / -2), 0px);
+    margin-top: 5svh;
+    margin-bottom: 15svh;
+    overflow-block: clip;
+  }
+
+  .parallax-container > * {
+    display: block;
+    height: auto;
+  }
+
+  .parallax-layer {
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .layer-mobile {
+    display: none;
+  }
+  .layer-back {
+    aspect-ratio: 1631 / 1362;
+    background-image: url("/assets/images/background.png");
+    z-index: 1;
+    --parallax-speed: 100;
+  }
+
+  .layer-mid {
+    aspect-ratio: 1631 / 798;
+    background-image: url("/assets/images/middle.png");
+    z-index: 2;
+    --parallax-speed: 50;
+  }
+
+  .layer-front {
+    background-size: contain;
+    background-position: center bottom;
+    background-image: url("/assets/images/foreground.png");
+    animation: none;
+    z-index: 3;
+  }
 }
 
 /* Projects grid */
 .projects-section {
   margin: 2rem auto;
 }
+
 .projects-section h2 {
   margin-bottom: 0.75rem;
   color: var(--minima-link-base-color);
@@ -75,6 +122,7 @@
   border: 1px solid rgba(255, 255, 255, 0.04);
   color: inherit;
 }
+
 .project-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
@@ -83,14 +131,17 @@
 .project-card-body {
   padding: 1rem;
 }
+
 .project-title {
   margin: 0 0 0.5rem 0;
   font-size: 1.05rem;
   color: var(--minima-link-base-color);
 }
+
 .project-title :visited {
   color: var(--minima-link-visited-color);
 }
+
 .project-desc {
   margin: 0 0 0.75rem 0;
   color: rgba(255, 255, 255, 0.8);
@@ -105,11 +156,13 @@
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
 }
+
 .project-meta .lang {
   background: rgba(255, 255, 255, 0.03);
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
 }
+
 .project-meta .stars {
   margin-left: auto;
 }
@@ -120,12 +173,15 @@
     background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
+
   .project-desc {
     color: rgba(0, 0, 0, 0.8);
   }
+
   .project-meta {
     color: rgba(0, 0, 0, 0.6);
   }
+
   .project-meta .lang {
     background: rgba(0, 0, 0, 0.03);
   }
