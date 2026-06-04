@@ -7,7 +7,7 @@
     var isMobile = typeof window !== 'undefined' && (window.matchMedia && window.matchMedia('(max-width: 799px)').matches);
     if (!isMobile) return;
 
-    var chance = 1; // 20%
+    var chance = 0.2; // 20%
     if (Math.random() >= chance) return;
 
     var href = '/assets/css/phosphor.css';
