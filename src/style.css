@@ -2,18 +2,18 @@
 
 /* Suas utilidades de imagem de fundo para o Vite processar */
 @utility bg-metricas-mobile {
-  background-image: url("assets/mob-bg-metricas.jpg");
+  background-image: url("assets/mob-bg-metricas.webp");
 }
 
 @utility bg-metricas-desktop {
-  background-image: url("assets/bg-metricas.jpg");
+  background-image: url("assets/bg-metricas.webp");
 }
 @utility bg-perfil-mobile {
-  background-image: url("assets/mob-bg-perfil.jpg");
+  background-image: url("assets/mob-bg-perfil.webp");
 }
 
 @utility bg-perfil-desktop {
-  background-image: url("assets/bg-perfil.jpg");
+  background-image: url("assets/bg-perfil.webp");
 }
 
 @theme {
