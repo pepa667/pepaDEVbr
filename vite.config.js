@@ -1,27 +1,12 @@
 import { defineConfig } from 'vite'
-import Unfonts from 'unplugin-fonts/vite'
+import webfontDl from 'vite-plugin-webfont-dl'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    Unfonts({
-      google: {
-        families: [
-          {
-            name: "Roboto Slab",
-            styles: "wght@400;700;900",
-          },
-          {
-            name: "Inter",
-            styles: "wght@300;400;600",
-          },
-          {
-            name: "Space Mono",
-          }
-        ],
-        display: 'swap',
-      },
-    }),
+    webfontDl([
+      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Roboto+Slab:wght@400;700;900&family=Space+Mono&display=swap"
+    ]),
   ],
 })

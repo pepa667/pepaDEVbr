@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "unplugin-fonts": "^2.0.0",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vite-plugin-webfont-dl": "^3.12.0"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
