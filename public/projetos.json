@@ -1,92 +1,165 @@
-[
-  {
-    "id": 1,
-    "title": "E-commerce Pro",
-    "desc": "Descrição detalhada do projeto 1, focando na conversão e na arquitetura de componentes leves para carregamento mobile instantâneo.",
-    "imgSrc": "https://picsum.photos/id/1062/800/600",
-    "url": "https://exemplo.com/site1",
-    "categoria": "Web Design / Dev",
-    "performance": "99/100 (Lighthouse)",
-    "status": "No Ar"
-  },
-  {
-    "id": 2,
-    "title": "Landing Page de Alta Conversão",
-    "desc": "Landing page com foco puramente em performance. Estrutura otimizada e design minimalista gerando resultados agressivos.",
-    "imgSrc": "https://picsum.photos/id/1069/800/600",
-    "url": "https://exemplo.com/site2",
-    "categoria": "Landing Page / LP",
-    "performance": "100/100 (Lighthouse)",
-    "status": "Em Produção"
-  },
-  {
-    "id": 3,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/60/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 4,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/61/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 5,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/62/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 6,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/63/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 7,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/64/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 8,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/65/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  },
-  {
-    "id": 9,
-    "title": "Dashboard ERP Corporativo",
-    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
-    "imgSrc": "https://picsum.photos/id/66/800/600",
-    "url": "https://exemplo.com/site_",
-    "categoria": "SaaS / Fullstack",
-    "performance": "96/100 (Lighthouse)",
-    "status": "Disponível para Compra"
-  }
-]
+{
+  "ultima_atualizacao": "2026-06-20",
+  "itens": [
+    {
+      "id": 1,
+      "title": "E-commerce Pro",
+      "desc": "Plataforma de vendas robusta focada em conversão agressiva e componentes modulares leves para carregamento instantâneo em conexões 3G/4G.",
+      "imgSrc": "https://picsum.photos/id/1062/800/600",
+      "url": "https://exemplo.com/site1",
+      "categoria": "Web Design / Dev",
+      "performance": "99/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 2,
+      "title": "Landing Page Hype",
+      "desc": "Página de captura com foco puramente em performance. Estrutura otimizada, animações em CSS puro e design minimalista gerando leads qualificados.",
+      "imgSrc": "https://picsum.photos/id/1069/800/600",
+      "url": "https://exemplo.com/site2",
+      "categoria": "Landing Page / LP",
+      "performance": "100/100 (Lighthouse)",
+      "status": "Em Produção"
+    },
+    {
+      "id": 3,
+      "title": "Dashboard ERP Core",
+      "desc": "Interface analítica complexa para sistema de gestão administrativa corporativa. Painel limpo com gráficos em tempo real e controle granular de dados.",
+      "imgSrc": "https://picsum.photos/id/60/800/600",
+      "url": "https://exemplo.com/site3",
+      "categoria": "SaaS / Fullstack",
+      "performance": "96/100 (Lighthouse)",
+      "status": "Disponível"
+    },
+    {
+      "id": 4,
+      "title": "Plataforma EdTech",
+      "desc": "Ambiente virtual de aprendizagem otimizado para streaming de vídeo integrado com entrega síncrona de arquivos e telemetria de progresso dos alunos.",
+      "imgSrc": "https://picsum.photos/id/180/800/600",
+      "url": "https://exemplo.com/site4",
+      "categoria": "SaaS / Fullstack",
+      "performance": "94/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 5,
+      "title": "BebopCORE Firmware",
+      "desc": "Firmware bare-metal de baixíssima latência compilado para microcontroladores focado na conversão de shells antigos em gamepads Bluetooth nativos.",
+      "imgSrc": "https://picsum.photos/id/250/800/600",
+      "url": "https://exemplo.com/site5",
+      "categoria": "IoT / Firmware",
+      "performance": "99.8% (Estável)",
+      "status": "Compilado"
+    },
+    {
+      "id": 6,
+      "title": "App de Delivery Nativo",
+      "desc": "Interface mobile refinada voltada para o setor de logística de alimentos, priorizando tracking via mapas em tempo real e cache offline persistente.",
+      "imgSrc": "https://picsum.photos/id/365/800/600",
+      "url": "https://exemplo.com/site6",
+      "categoria": "Mobile / UX",
+      "performance": "98/100 (Core Web Vitals)",
+      "status": "Homologação"
+    },
+    {
+      "id": 7,
+      "title": "Fintech Wallet UI",
+      "desc": "Design de carteira digital modular focado em segurança de transações, exibição instantânea de extratos complexos e micro-interações fluidas.",
+      "imgSrc": "https://picsum.photos/id/445/800/600",
+      "url": "https://exemplo.com/site7",
+      "categoria": "Fintech / SaaS",
+      "performance": "97/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 8,
+      "title": "Painel de Telemetria CNC",
+      "desc": "Módulo web baseado em conexões via WebSockets para ler barramentos de máquinas de corte a laser e renderizar coordenadas cartesianas em tempo real.",
+      "imgSrc": "https://picsum.photos/id/522/800/600",
+      "url": "https://exemplo.com/site8",
+      "categoria": "IoT / Industrial",
+      "performance": "99.2% (Realtime)",
+      "status": "Em Testes"
+    },
+    {
+      "id": 9,
+      "title": "Portal Imobiliário Inteligente",
+      "desc": "Engine de busca parametrizada e cruzamento de dados geográficos para imobiliárias de alto padrão, contando com indexação estática ultra veloz.",
+      "imgSrc": "https://picsum.photos/id/619/800/600",
+      "url": "https://exemplo.com/site9",
+      "categoria": "Web Design / Dev",
+      "performance": "95/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 10,
+      "title": "Rocinante Billing Engine",
+      "desc": "Arquitetura de microserviço escalável em Docker dedicada para processamento de filas e geração automatizada de Notas Fiscais Eletrônicas (NF-e).",
+      "imgSrc": "https://picsum.photos/id/824/800/600",
+      "url": "https://exemplo.com/site10",
+      "categoria": "Backend / Cloud",
+      "performance": "93/100 (Load Test)",
+      "status": "Produção"
+    },
+    {
+      "id": 11,
+      "title": "Portfólio Brutalista",
+      "desc": "Design focado em tipografia marcante, grids estruturais rígidos e visual de terminal retro-futurista com performance extrema e zero dependências.",
+      "imgSrc": "https://picsum.photos/id/902/800/600",
+      "url": "https://exemplo.com/site11",
+      "categoria": "Landing Page / LP",
+      "performance": "100/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 12,
+      "title": "SaaS de Gestão de Fontes",
+      "desc": "Gerenciador de tipografia em nuvem integrado via API local com sincronização em tempo real de ativos de design e fontes customizadas organizadas.",
+      "imgSrc": "https://picsum.photos/id/1050/800/600",
+      "url": "https://exemplo.com/site12",
+      "categoria": "SaaS / Tooling",
+      "performance": "96/100 (Lighthouse)",
+      "status": "Disponível"
+    },
+    {
+      "id": 13,
+      "title": "CRM Automotivo Custom",
+      "desc": "Painel de controle focado no agendamento técnico de ordens de serviço de oficinas e controle de estoque de peças físicas com alertas dinâmicos.",
+      "imgSrc": "https://picsum.photos/id/1074/800/600",
+      "url": "https://exemplo.com/site13",
+      "categoria": "SaaS / Fullstack",
+      "performance": "94/100 (Lighthouse)",
+      "status": "Em Produção"
+    },
+    {
+      "id": 14,
+      "title": "Crypto Analytics Dashboard",
+      "desc": "Página única em React mapeando dados de exchanges globais, transformando logs JSON pesados em canvas visuais polidos sem travar a thread principal.",
+      "imgSrc": "https://picsum.photos/id/984/800/600",
+      "url": "https://exemplo.com/site14",
+      "categoria": "SaaS / React",
+      "performance": "97/100 (Lighthouse)",
+      "status": "No Ar"
+    },
+    {
+      "id": 15,
+      "title": "App de Telemetria de Corrida",
+      "desc": "Interface leve baseada em Next.js para leitura e compilação de dados de sensores esportivos e geração automática de gráficos de performance e fadiga.",
+      "imgSrc": "https://picsum.photos/id/304/800/600",
+      "url": "https://exemplo.com/site15",
+      "categoria": "SaaS / Fullstack",
+      "performance": "95/100 (Lighthouse)",
+      "status": "Em Testes"
+    },
+    {
+      "id": 16,
+      "title": "Portfólio Fotografia Minimal",
+      "desc": "Galeria de imagens otimizada para fotógrafos profissionais utilizando lazy loading agressivo e compressão WebP em tempo real de arquivos RAW.",
+      "imgSrc": "https://picsum.photos/id/452/800/600",
+      "url": "https://exemplo.com/site16",
+      "categoria": "Web Design / Dev",
+      "performance": "99/100 (Lighthouse)",
+      "status": "No Ar"
+    }
+  ]
+}

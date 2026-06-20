@@ -1,39 +1,77 @@
 import './style.css'
 
-// Mapeamento do DOM
+// ==========================================
+// 1. MAPEAMENTO DO DOM (PADRÃO KEBAB-CASE)
+// ==========================================
 const galeriaContainer = document.getElementById('galeriaContainer');
 const bulletsContainer = document.getElementById('bulletsContainer');
 
-const modal = document.getElementById('projectModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalDesc = document.getElementById('modalDesc');
-const modalImg = document.getElementById('modalImg');
-const modalLink = document.getElementById('modalLink');
+// Elementos do Modal de Projetos
+const projectModal = document.getElementById('project-modal');
+const projectModalDialog = document.getElementById('project-modal-dialog');
+const projectModalImg = document.getElementById('project-modal-img');
+const projectModalTitle = document.getElementById('project-modal-title');
+const projectModalDesc = document.getElementById('project-modal-desc');
+const projectModalCat = document.getElementById('project-modal-cat');
+const projectModalPerf = document.getElementById('project-modal-perf');
+const projectModalStatus = document.getElementById('project-modal-status');
+const projectModalLink = document.getElementById('project-modal-link');
 
-const modalCat = document.getElementById('modalCat');
-const modalPerf = document.getElementById('modalPerf');
-const modalStatus = document.getElementById('modalStatus');
+// Elementos do Modal de Contato
+const contatoModal = document.getElementById('contato-modal');
+const contatoModalBackdrop = document.getElementById('contato-modal-backdrop');
+const contatoModalDialog = document.getElementById('contato-modal-dialog');
+const contatoModalCloseBtn = document.getElementById('contato-modal-close-btn');
+const contatoModalCancelBtn = document.getElementById('contato-modal-cancel-btn');
+const contatoModalConfirmBtn = document.getElementById('contato-modal-confirm-btn');
+const contatoModalTitle = document.getElementById('contato-modal-title');
+const contatoModalMessage = document.getElementById('contato-modal-message');
+const contatoModalIcon = document.getElementById('contato-modal-icon');
 
-// Variáveis de estado globais
+// Configurações Globais de Comunicação
+const CONTATO_CONFIG = {
+    whatsapp_phone: '5515981450001',
+    email_address: 'pepa@pepa.dev.br',
+    messages: {
+        'projeto-zap': 'Olá, Pepa! Curti seu portfólio e gostaria de bater um papo para fazer um orçamento para o meu projeto.',
+        'projeto-email': 'Olá, Pepa!\n\nGostaria de solicitar um orçamento e validar a disponibilidade para o desenvolvimento de um projeto exclusivo.\n\nAguardo retorno!',
+        'default': 'Olá! Gostaria de iniciar um atendimento com você.'
+    }
+};
+
+// Variáveis de Estado Globais
 let listaDeProjetos = [];
-let currentIndex = 0; // Guarda qual card está ativo atualmente
+let currentIndex = 0;
 let autoplayTimer = null;
 let autoplayAtivo = true;
-let isProgrammaticScroll = false; // <-- NOVA FLAG: Trava o sensor de scroll manual durante animações
-/**
- * Carrega os dados do JSON externo
- */
+let isProgrammaticScroll = false;
+
+// ==========================================
+// 2. SISTEMA DO PORTFÓLIO & GALERIA (DATA DINÂMICA)
+// ==========================================
+
 async function initPortfolio() {
     try {
         const response = await fetch('/projetos.json');
         if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
 
-        listaDeProjetos = await response.json();
+        // Agora recebemos o objeto completo de dados
+        const dados = await response.json();
 
+        // Armazena a array de itens na nossa variável global antiga
+        listaDeProjetos = dados.itens || [];
+
+        // Injeta a data de atualização direto no HTML de forma dinâmica
+        const dataEl = document.getElementById('portfolio-updated-at');
+        if (dataEl && dados.ultima_atualizacao) {
+            dataEl.innerText = `> Última atualização: ${dados.ultima_atualizacao}`;
+        }
+
+        // Segue o baile com a renderização normal usando a array extraída
         renderPortfolio(listaDeProjetos);
-        updateActiveState(0); // Começa destacando o primeiro item
-        startAutoplay();      // Lança o timer aleatório
-        setupInteractions();  // Configura os listeners de mouse/interação
+        updateActiveState(0);
+        startAutoplay();
+        setupInteractions();
 
     } catch (error) {
         console.error("Erro no portfólio:", error);
@@ -43,9 +81,7 @@ async function initPortfolio() {
     }
 }
 
-/**
- * Renderiza a Galeria e os Bullets com suporte a Scroll Centralizado
- */
+
 function renderPortfolio(projetos) {
     if (!galeriaContainer || !bulletsContainer) return;
 
@@ -53,31 +89,26 @@ function renderPortfolio(projetos) {
     bulletsContainer.innerHTML = '';
 
     projetos.forEach((proj, index) => {
-        // Criar Card
         const card = document.createElement('div');
-
-        // Configuração de classes do Tailwind v4:
-        // Adicionado hover condicional quando o card NÃO for o ativo, e transições suaves
         card.className = "w-[100vw] lg:w-[33.333vw] h-[60vh] flex-none snap-center relative group cursor-pointer border-r border-t-4 border-t-transparent border-slate-800 transition-all duration-300 hover:border-t-slate-600 hover:bg-slate-900/20";
         card.setAttribute('data-index', index);
 
         card.addEventListener('click', () => {
             stopAutoplayCompletely();
-            openModal(proj);
+            openProjectModal(proj);
         });
 
         card.innerHTML = `
-      <img src="${proj.imgSrc}" alt="${proj.title}" class="w-full h-full object-cover lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex flex-col justify-end p-8 transition-opacity duration-300">
-        <h3 class="font-serif text-3xl text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">${proj.title}</h3>
-        <p class="font-mono text-brand-accent text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">[+] Ver detalhes</p>
-      </div>
-    `;
+            <img src="${proj.imgSrc}" alt="${proj.title}" class="w-full h-full object-cover lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex flex-col justify-end p-8 transition-opacity duration-300">
+                <h3 class="font-serif text-3xl text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">${proj.title}</h3>
+                <p class="font-mono text-brand-accent text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">[+] Ver detalhes</p>
+            </div>
+        `;
         galeriaContainer.appendChild(card);
 
-        // Criar Bullet
         const bullet = document.createElement('button');
-        bullet.className = "w-6 h-6 md:w-8 md:h-8 rounded-full transition-all duration-300 focus:outline-none bg-slate-700 hover:bg-slate-500";
+        bullet.className = "w-6 h-6 md:w-8 md:h-8 rounded-full transition-all duration-300 focus:outline-none bg-slate-700 hover:bg-slate-500 cursor-pointer";
         bullet.setAttribute('aria-label', `Ir para projeto ${index + 1}`);
         bullet.setAttribute('data-bullet-index', index);
 
@@ -91,48 +122,31 @@ function renderPortfolio(projetos) {
     });
 }
 
-/**
- * Move a galeria mantendo o card ativo no CENTRO da página de forma inteligente
- * SEM causar pulos ou scrolls verticais na página inteira
- */
 function scrollToIndex(index) {
     const cards = galeriaContainer.querySelectorAll('[data-index]');
     if (!cards.length || !cards[index]) return;
 
-    // Ativa a flag informando que o scroll foi programático
     isProgrammaticScroll = true;
-
-    // Atualiza os estados visuais imediatamente
     updateActiveState(index);
 
-    // --- O SEGREDO DO FIX AQUI: ---
-    // Em vez de scrollIntoView, calculamos a posição horizontal exata para centralizar o card
     const targetCard = cards[index];
     const containerWidth = galeriaContainer.offsetWidth;
-
-    // Posição do card em relação ao início da galeria + metade do tamanho dele - metade do tamanho da tela
     const targetScrollLeft = targetCard.offsetLeft + (targetCard.offsetWidth / 2) - (containerWidth / 2);
 
-    // Executa o scroll horizontal puro, isolado de qualquer interferência vertical
     galeriaContainer.scrollTo({
         left: targetScrollLeft,
         behavior: 'smooth'
     });
 
-    // Aguarda a animação suave terminar para liberar o sensor manual
     setTimeout(() => {
         isProgrammaticScroll = false;
     }, 600);
 }
 
-/**
- * Atualiza os estados visuais dos Cards e Bullets (Com tratamento especial de Hover para o ativo)
- */
 function updateActiveState(index) {
     if (!listaDeProjetos.length) return;
     currentIndex = index;
 
-    // 1. Sincroniza Bullets
     const bullets = bulletsContainer.querySelectorAll('button');
     bullets.forEach((bullet, idx) => {
         if (idx === index) {
@@ -144,32 +158,23 @@ function updateActiveState(index) {
         }
     });
 
-    // 2. Sincroniza os Cards e desativa efeitos de hover genéricos no que já está ativo
     const cards = galeriaContainer.querySelectorAll('[data-index]');
     cards.forEach((card, idx) => {
         if (idx === index) {
-            // Card Ativo: Ganha a borda da marca, fundo destacado e remove a variação cinza do hover comum
             card.classList.remove('border-t-transparent', 'hover:border-t-slate-600', 'hover:bg-slate-900/20');
             card.classList.add('border-t-brand-accent', 'bg-slate-900/40');
-
-            // Força a imagem do card ativo a perder o filtro cinza mesmo sem o mouse por cima
             const img = card.querySelector('img');
             if (img) img.classList.remove('lg:grayscale');
         } else {
-            // Cards Inativos: Voltam pro estado padrão esperando interação
             card.classList.remove('border-t-brand-accent', 'bg-slate-900/40');
             card.classList.add('border-t-transparent', 'hover:border-t-slate-600', 'hover:bg-slate-900/20');
-
             const img = card.querySelector('img');
             if (img) img.classList.add('lg:grayscale');
         }
     });
 }
-/**
- * Escuta o scroll manual (via trackpad/dedo) apenas se NÃO for um scroll programático
- */
+
 function handleManualScroll() {
-    // Se o scroll veio de um clique de bullet ou timer, ignora essa função completamente!
     if (isProgrammaticScroll) return;
 
     const cards = galeriaContainer.children;
@@ -181,7 +186,6 @@ function handleManualScroll() {
     let closestIndex = 0;
     let closestDistance = Infinity;
 
-    // Em vez de olhar só pro canto esquerdo, vamos ver qual card está mais perto do CENTRO real do container!
     Array.from(cards).forEach((card, idx) => {
         const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
         const distance = Math.abs(containerCenter - cardCenter);
@@ -201,34 +205,25 @@ if (galeriaContainer) {
     galeriaContainer.addEventListener('scroll', handleManualScroll);
 }
 
-/**
- * SISTEMA DE AUTOPLAY (TIMER ALEATÓRIO)
- */
 function startAutoplay() {
     if (!autoplayAtivo) return;
-
-    // Limpa qualquer timer órfão antes de criar outro
     clearInterval(autoplayTimer);
 
     autoplayTimer = setInterval(() => {
         if (!listaDeProjetos.length) return;
 
-        // Gera um número aleatório diferente do índice atual para dar efeito de troca dinâmica
         let randomIndex = currentIndex;
         if (listaDeProjetos.length > 1) {
             while (randomIndex === currentIndex) {
                 randomIndex = Math.floor(Math.random() * listaDeProjetos.length);
             }
         }
-
         scrollToIndex(randomIndex);
-    }, 4000); // Roda a cada 4 segundos
+    }, 4000);
 }
 
 function pauseAutoplay() {
-    if (autoplayAtivo) {
-        clearInterval(autoplayTimer);
-    }
+    if (autoplayAtivo) clearInterval(autoplayTimer);
 }
 
 function stopAutoplayCompletely() {
@@ -236,57 +231,202 @@ function stopAutoplayCompletely() {
     clearInterval(autoplayTimer);
 }
 
-/**
- * Configura as interações de Mouse para pausar temporariamente
- */
 function setupInteractions() {
     if (!galeriaContainer) return;
-
-    // Mouse entrou na galeria: Interrompe temporariamente
     galeriaContainer.addEventListener('mouseenter', pauseAutoplay);
-
-    // Mouse saiu da galeria: Retoma o ciclo do timer de onde parou (se não tiver sido desativado por clique)
     galeriaContainer.addEventListener('mouseleave', () => {
         if (autoplayAtivo) startAutoplay();
     });
 }
 
-/**
- * Controle do Modal
- */
-function openModal(projeto) {
-    if (!modal) return;
-    modalTitle.innerText = projeto.title;
-    modalDesc.innerText = projeto.desc;
-    modalImg.src = projeto.imgSrc;
-    modalLink.href = projeto.url;
-    modalCat.innerText = projeto.categoria;
-    modalPerf.innerText = projeto.performance;
-    modalStatus.innerText = projeto.status;
+// ==========================================
+// 3. CONTROLE DO MODAL DE PROJETOS
+// ==========================================
 
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    setTimeout(() => modal.classList.remove('opacity-0'), 10);
+function openProjectModal(projeto) {
+    if (!projectModal) return;
+
+    projectModalImg.src = projeto.imgSrc;
+    projectModalTitle.innerText = projeto.title;
+    projectModalDesc.innerText = projeto.desc;
+    projectModalCat.innerText = projeto.categoria || '--';
+    projectModalPerf.innerText = projeto.performance || '--';
+    projectModalStatus.innerText = projeto.status || '--';
+    projectModalLink.href = projeto.url || '#';
+
+    projectModal.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+    projectModalDialog.classList.remove('translate-y-4');
     document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-    if (!modal) return;
-    modal.classList.add('opacity-0');
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }, 300);
-    document.body.style.overflow = 'auto';
+function closeProjectModal() {
+    if (!projectModal) return;
+
+    projectModal.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+    projectModalDialog.classList.add('translate-y-4');
+    document.body.style.overflow = '';
 }
 
+// Listeners do Modal de Projetos
+document.getElementById('project-modal-close-btn')?.addEventListener('click', closeProjectModal);
+document.getElementById('project-modal-cancel-btn')?.addEventListener('click', closeProjectModal);
+document.getElementById('project-modal-backdrop')?.addEventListener('click', closeProjectModal);
+
+
+// ==========================================
+// 4. CONTROLE DO MODAL DE CONTATO DINÂMICO
+// ==========================================
+
+function initContatoModal() {
+    if (!contatoModal) return;
+
+    const svgs = {
+        whatsapp: `<svg class="h-5 w-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.296 1.489 4.93 1.49 5.361 0 9.749-4.305 9.752-9.605.001-2.568-1.002-4.979-2.825-6.793C16.68 2.431 14.269 1.43 11.72 1.43 6.361 1.43 1.974 5.735 1.971 11.036c-.001 1.742.476 3.442 1.391 4.912l-.982 3.593 3.667-.957z"></path></svg>`,
+        email: `<svg class="h-5 w-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+    };
+
+    function openModal(type, ctaKey) {
+        const rawMessage = CONTATO_CONFIG.messages[ctaKey] || CONTATO_CONFIG.messages['default'];
+        contatoModalMessage.innerText = rawMessage;
+        contatoModalIcon.innerHTML = svgs[type] || '';
+
+        if (type === 'whatsapp') {
+            contatoModalTitle.innerText = 'Abrir WhatsApp';
+            contatoModalConfirmBtn.innerText = 'Abrir Zap';
+            contatoModalConfirmBtn.href = `https://api.whatsapp.com/send?phone=${CONTATO_CONFIG.whatsapp_phone}&text=${encodeURIComponent(rawMessage)}`;
+            contatoModalConfirmBtn.className = "px-5 py-2.5 rounded font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors cursor-pointer flex items-center gap-2";
+        } else {
+            contatoModalTitle.innerText = 'Redirecionar para Email';
+            contatoModalConfirmBtn.innerText = 'Abrir Email';
+            contatoModalConfirmBtn.href = `mailto:${CONTATO_CONFIG.email_address}?subject=${encodeURIComponent('Solicitação de Projeto // Pepa Dev')}&body=${encodeURIComponent(rawMessage)}`;
+            contatoModalConfirmBtn.className = "px-5 py-2.5 rounded font-bold text-slate-950 bg-brand-accent hover:bg-brand-accent/90 transition-colors cursor-pointer flex items-center gap-2";
+        }
+
+        contatoModal.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+        contatoModalDialog.classList.remove('translate-y-4');
+        document.body.style.overflow = 'hidden';
+        contatoModalConfirmBtn.focus();
+    }
+
+    function closeModal() {
+        contatoModal.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+        contatoModalDialog.classList.add('translate-y-4');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.modal-trigger-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(btn.getAttribute('data-type'), btn.getAttribute('data-cta'));
+        });
+    });
+
+    contatoModalCloseBtn?.addEventListener('click', closeModal);
+    contatoModalCancelBtn?.addEventListener('click', closeModal);
+    contatoModalBackdrop?.addEventListener('click', closeModal);
+    contatoModalConfirmBtn?.addEventListener('click', () => setTimeout(closeModal, 400));
+}
+
+// Handler global para a tecla ESC
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-        closeModal();
+    if (e.key === 'Escape') {
+        if (contatoModal && !contatoModal.classList.contains('invisible')) {
+            contatoModalCancelBtn.click();
+        }
+        if (projectModal && !projectModal.classList.contains('invisible')) {
+            closeProjectModal();
+        }
     }
 });
 
-// Inicialização Geral
-initPortfolio();
 
-window.closeModal = closeModal;
+// ==========================================
+// 5. SISTEMA DE TELEMETRIA (LIVE STATS)
+// ==========================================
+
+const initLiveStats = () => {
+    const counters = document.querySelectorAll(".counter-up");
+    const progressBars = document.querySelectorAll(".progress-fill");
+
+    if (!counters.length && !progressBars.length) return;
+
+    const startCounting = (element) => {
+        const target = +element.getAttribute("data-target");
+        const isFloat = element.getAttribute("data-float") === "true";
+        const duration = 1500;
+        const startTime = performance.now();
+
+        const updateNumber = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentVal = easeProgress * target;
+
+            element.innerText = isFloat ? currentVal.toFixed(1) : Math.floor(currentVal);
+
+            if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+            } else {
+                element.innerText = isFloat ? target.toFixed(1) : target;
+            }
+        };
+        requestAnimationFrame(updateNumber);
+    };
+
+    const statsObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    if (el.classList.contains("counter-up")) startCounting(el);
+                    if (el.classList.contains("progress-fill")) el.style.width = el.getAttribute("data-width");
+                    observer.unobserve(el);
+                }
+            });
+        },
+        { threshold: 0.15 },
+    );
+
+    counters.forEach((counter) => statsObserver.observe(counter));
+    progressBars.forEach((bar) => statsObserver.observe(bar));
+};
+
+// ==========================================
+// CONTROLE DO BOTÃO SCROLL TO TOP
+// ==========================================
+function initScrollToTop() {
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+    if (!scrollTopBtn) return;
+
+    // Escuta o scroll da página
+    window.addEventListener('scroll', () => {
+        // Se scrollou mais de 300px da linha de cima, mostra a bolinha
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+        } else {
+            scrollTopBtn.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+        }
+    });
+
+    // Evento de clique para subir suavemente
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Chame a execução no final do arquivo junto com as outras
+initScrollToTop();
+
+// ==========================================
+// 6. INICIALIZAÇÃO E BOOTSTRAP
+// ==========================================
+
+initPortfolio();
+initContatoModal();
+
+document.addEventListener("DOMContentLoaded", () => {
+    initLiveStats();
+});

@@ -5,9 +5,35 @@
   --font-serif: "Roboto Slab", serif;
   --font-mono: "Space Mono", monospace;
 
-  --color-brand-dark: #0f172a;
+  /* --color-brand-dark: #0f172a; */
   --color-brand-dark: #0e111a;
   --color-brand-accent: #10b981;
+}
+
+/* Força o fundo escuro na página inteira e remove margens padrão */
+html,
+body {
+  background-color: var(--color-brand-dark); /* Isso é o correspondente exato ao bg-slate-950 */
+  color: #f8fafc; /* text-slate-50 pra garantir legibilidade */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  scroll-behavior: smooth; /* Deixa o scroll macio ao clicar nos links */
+}
+
+/* Ajuste fino para a barra de rolagem não ficar destoando */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b; /* bg-slate-800 */
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-accent); /* amber-500 pra dar o destaque que você pediu */
 }
 
 @utility hide-scrollbar {
@@ -15,5 +41,89 @@
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* 1. Animações de Entrada (Trigger de Loading) */
+@keyframes heroZoomOut {
+  from {
+    /* transform: translateX(-50px);
+    filter: blur(20px); */
+    filter: opacity(0);
+    line-height: 0.3;
+  }
+  to {
+    /* transform: translateX(0);
+    filter: blur(0); */
+    filter: opacity(1);
+    line-height: 0.95;
+  }
+}
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-hero-title {
+  animation: heroZoomOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-up {
+  animation: textReveal 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 2. Efeitos Reativos Durante o Scroll (Suportado nos navegadores modernos) */
+@supports (animation-timeline: scroll()) {
+  @keyframes revealOnScroll {
+    from {
+      opacity: 0;
+      transform: translateY(200px);
+      filter: brightness(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: brightness(1);
+    }
+  }
+  @keyframes shrinkOverlay {
+    from {
+      opacity: 0.9;
+    }
+    to {
+      opacity: 0.4;
+    }
+  }
+  @keyframes growLine {
+    from {
+      height: 0%;
+    }
+    to {
+      height: 100%;
+    }
+  }
+
+  /* Aplica reveal suave conforme as seções entram na tela */
+  .scroll-reveal {
+    view-timeline-name: --section;
+    view-timeline-axis: block;
+    animation-name: revealOnScroll;
+    animation-fill-mode: both;
+    animation-timeline: --section;
+    /* Usa a variável se ela existir, senão o padrão é 0% */
+    animation-range: entry calc(2% + var(--delay-step, 0%)) contain calc(20% + var(--delay-step, 0%));
+  }
+}
+
+/* Fallback clássico caso o navegador não suporte animação de scroll */
+@media (prefixed-animation-timeline: none) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
   }
 }
