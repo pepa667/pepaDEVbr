@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Roboto Slab", serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-brand-dark: #0f172a;
+  --color-brand-dark: #0e111a;
+  --color-brand-accent: #10b981;
+}
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "E-commerce Pro",
+    "desc": "Descrição detalhada do projeto 1, focando na conversão e na arquitetura de componentes leves para carregamento mobile instantâneo.",
+    "imgSrc": "https://picsum.photos/id/1062/800/600",
+    "url": "https://exemplo.com/site1",
+    "categoria": "Web Design / Dev",
+    "performance": "99/100 (Lighthouse)",
+    "status": "No Ar"
+  },
+  {
+    "id": 2,
+    "title": "Landing Page de Alta Conversão",
+    "desc": "Landing page com foco puramente em performance. Estrutura otimizada e design minimalista gerando resultados agressivos.",
+    "imgSrc": "https://picsum.photos/id/1069/800/600",
+    "url": "https://exemplo.com/site2",
+    "categoria": "Landing Page / LP",
+    "performance": "100/100 (Lighthouse)",
+    "status": "Em Produção"
+  },
+  {
+    "id": 3,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/60/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 4,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/61/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 5,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/62/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 6,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/63/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 7,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/64/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 8,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/65/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  },
+  {
+    "id": 9,
+    "title": "Dashboard ERP Corporativo",
+    "desc": "Interface complexa para sistema de gestão administrativa. Painel limpo com gráficos fluidos e controle total de dados.",
+    "imgSrc": "https://picsum.photos/id/66/800/600",
+    "url": "https://exemplo.com/site_",
+    "categoria": "SaaS / Fullstack",
+    "performance": "96/100 (Lighthouse)",
+    "status": "Disponível para Compra"
+  }
+]
