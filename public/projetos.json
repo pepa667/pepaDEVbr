@@ -34,12 +34,12 @@
     {
       "id": 4,
       "title": "Dra. Adriana",
-      "desc": "Landing page institucional focada no segmento médico/saúde, estruturada para conversão rápida de consultas particulares e apresentação simplificada de especialidades clínicas.",
+      "desc": "Landing page institucional focada em advocacia trabalhista, estruturada para conversão de leads jurídicos, agendamento de consultorias e apresentação clara de áreas de atuação e direitos do trabalhador.",
       "imgSrc": "/portfolio/adriana.jpg",
       "url": "https://dra-adriana.netlify.app/",
-      "categoria": "Landing Page / Médica",
+      "categoria": "Landing Page / Jurídico",
       "performance": "94/100 (Lighthouse)",
-      "status": "Aguardando Conteúdo"
+      "status": "No Ar"
     },
     {
       "id": 5,
