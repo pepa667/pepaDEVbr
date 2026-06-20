@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Suas utilidades de imagem de fundo para o Vite processar */
+@utility bg-metricas-mobile {
+  background-image: url("assets/mob-bg-metricas.jpg");
+}
+
+@utility bg-metricas-desktop {
+  background-image: url("assets/bg-metricas.jpg");
+}
+@utility bg-perfil-mobile {
+  background-image: url("assets/mob-bg-perfil.jpg");
+}
+
+@utility bg-perfil-desktop {
+  background-image: url("assets/bg-perfil.jpg");
+}
+
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-serif: "Roboto Slab", serif;
