@@ -100,7 +100,7 @@ function renderPortfolio(projetos) {
 
         card.innerHTML = `
             <img src="${proj.imgSrc}" alt="${proj.title}" class="w-full h-full object-cover lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex flex-col justify-end p-8 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex flex-col justify-end p-8 transition-opacity duration-300">
                 <h3 class="font-serif text-3xl text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">${proj.title}</h3>
                 <p class="font-mono text-brand-accent text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">[+] Ver detalhes</p>
             </div>
