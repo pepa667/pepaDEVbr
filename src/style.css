@@ -30,7 +30,8 @@
 html,
 body {
   background-color: var(--color-brand-dark); /* Isso é o correspondente exato ao bg-slate-950 */
-  color: #f8fafc; /* text-slate-50 pra garantir legibilidade */
+  color: #e2e8f0; /* Deixa o texto geral em um tom claro (slate-200) para manter o contraste */
+  font-family: var(--font-sans); /* Já define a Inter como fonte padrão do site */
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -75,22 +76,10 @@ body {
     line-height: 0.95;
   }
 }
-@keyframes textReveal {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
 .animate-hero-title {
   animation: heroZoomOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.animate-fade-in-up {
-  animation: textReveal 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 200ms;
 }
 
 /* 2. Efeitos Reativos Durante o Scroll (Suportado nos navegadores modernos) */
@@ -105,22 +94,6 @@ body {
       opacity: 1;
       transform: translateY(0);
       filter: brightness(1);
-    }
-  }
-  @keyframes shrinkOverlay {
-    from {
-      opacity: 0.9;
-    }
-    to {
-      opacity: 0.4;
-    }
-  }
-  @keyframes growLine {
-    from {
-      height: 0%;
-    }
-    to {
-      height: 100%;
     }
   }
 
