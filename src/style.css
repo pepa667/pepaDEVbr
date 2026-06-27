@@ -24,6 +24,7 @@
   /* --color-brand-dark: #0f172a; */
   --color-brand-dark: #0e111a;
   --color-brand-accent: #10b981;
+  --color-brand-accent-light: color-mix(in srgb, var(--color-brand-accent) 50%, white);
 }
 
 /* Força o fundo escuro na página inteira e remove margens padrão */

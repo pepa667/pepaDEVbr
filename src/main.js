@@ -39,6 +39,13 @@ const CONTATO_CONFIG = {
     }
 };
 
+// Mapeamento Centralizado de Badges por Status
+const STATUS_BADGES = {
+    "No Ar": `<span class="text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 rounded text-[10px]">● NO AR</span>`,
+    "Aguardando Conteúdo": `<span class="text-blue-400 border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 rounded text-[10px]">● AGUARDANDO CONTEÚDO</span>`,
+    "Disponível": `<span class="text-amber-400 border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 rounded text-[10px]">● DEMONSTRAÇÃO</span>`
+};
+
 // Variáveis de Estado Globais
 let listaDeProjetos = [];
 let currentIndex = 0;
@@ -50,25 +57,20 @@ let isProgrammaticScroll = false;
 // 2. SISTEMA DO PORTFÓLIO & GALERIA (DATA DINÂMICA)
 // ==========================================
 
-async function initPortfolio() {
+async function initProjetos() {
     try {
         const response = await fetch('/projetos.json');
         if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
 
-        // Agora recebemos o objeto completo de dados
         const dados = await response.json();
-
-        // Armazena a array de itens na nossa variável global antiga
         listaDeProjetos = dados.itens || [];
 
-        // Injeta a data de atualização direto no HTML de forma dinâmica
-        const dataEl = document.getElementById('portfolio-updated-at');
+        const dataEl = document.getElementById('projetos-updated-at');
         if (dataEl && dados.ultima_atualizacao) {
             dataEl.innerText = `> Última atualização: ${dados.ultima_atualizacao}`;
         }
 
-        // Segue o baile com a renderização normal usando a array extraída
-        renderPortfolio(listaDeProjetos);
+        renderProjetos(listaDeProjetos);
         updateActiveState(0);
         startAutoplay();
         setupInteractions();
@@ -81,8 +83,7 @@ async function initPortfolio() {
     }
 }
 
-
-function renderPortfolio(projetos) {
+function renderProjetos(projetos) {
     if (!galeriaContainer || !bulletsContainer) return;
 
     galeriaContainer.innerHTML = '';
@@ -98,11 +99,19 @@ function renderPortfolio(projetos) {
             openProjectModal(proj);
         });
 
+        // Captura a badge correta baseada no status mapeado do JSON
+        const badgeHTML = STATUS_BADGES[proj.status] || STATUS_BADGES["Disponível"];
+
         card.innerHTML = `
             <img src="${proj.imgSrc}" alt="${proj.title}" class="w-full h-full object-cover lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500">
             <div class="absolute inset-0 bg-linear-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 flex flex-col justify-end p-8 transition-opacity duration-300">
-                <h3 class="font-serif text-3xl text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">${proj.title}</h3>
-                <p class="font-mono text-brand-accent text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">[+] Ver detalhes</p>
+                <div class="mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform flex items-center gap-2">
+                    <h3 class="font-serif text-3xl text-white">${proj.title}</h3>
+                </div>
+                <div class="mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-50">
+                    ${badgeHTML}
+                </div>
+                <p class="font-mono text-brand-accent text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform delay-100">[+] Ver detalhes</p>
             </div>
         `;
         galeriaContainer.appendChild(card);
@@ -251,7 +260,9 @@ function openProjectModal(projeto) {
     projectModalDesc.innerText = projeto.desc;
     projectModalCat.innerText = projeto.categoria || '--';
     projectModalPerf.innerText = projeto.performance || '--';
-    projectModalStatus.innerText = projeto.status || '--';
+
+    // Injeta a badge semântica estilizada em formato HTML também dentro do Modal
+    projectModalStatus.innerHTML = STATUS_BADGES[projeto.status] || STATUS_BADGES["Disponível"];
     projectModalLink.href = projeto.url || '#';
 
     projectModal.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
@@ -267,7 +278,6 @@ function closeProjectModal() {
     document.body.style.overflow = '';
 }
 
-// Listeners do Modal de Projetos
 document.getElementById('project-modal-close-btn')?.addEventListener('click', closeProjectModal);
 document.getElementById('project-modal-cancel-btn')?.addEventListener('click', closeProjectModal);
 document.getElementById('project-modal-backdrop')?.addEventListener('click', closeProjectModal);
@@ -327,7 +337,6 @@ function initContatoModal() {
     contatoModalConfirmBtn?.addEventListener('click', () => setTimeout(closeModal, 400));
 }
 
-// Handler global para a tecla ESC
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         if (contatoModal && !contatoModal.classList.contains('invisible')) {
@@ -379,6 +388,7 @@ const initLiveStats = () => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
                     if (el.classList.contains("counter-up")) startCounting(el);
+                    // if (el.classList.contains("progress-fill")) el.style.width = (80 + (dataWidth - 90) * 2 - 2) + "%";
                     if (el.classList.contains("progress-fill")) el.style.width = el.getAttribute("data-width");
                     observer.unobserve(el);
                 }
@@ -398,9 +408,7 @@ function initScrollToTop() {
     const scrollTopBtn = document.getElementById('scroll-to-top-btn');
     if (!scrollTopBtn) return;
 
-    // Escuta o scroll da página
     window.addEventListener('scroll', () => {
-        // Se scrollou mais de 300px da linha de cima, mostra a bolinha
         if (window.scrollY > 300) {
             scrollTopBtn.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
         } else {
@@ -408,7 +416,6 @@ function initScrollToTop() {
         }
     });
 
-    // Evento de clique para subir suavemente
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
@@ -417,14 +424,13 @@ function initScrollToTop() {
     });
 }
 
-// Chame a execução no final do arquivo junto com as outras
 initScrollToTop();
 
 // ==========================================
 // 6. INICIALIZAÇÃO E BOOTSTRAP
 // ==========================================
 
-initPortfolio();
+initProjetos();
 initContatoModal();
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -29,7 +29,7 @@
       "url": "https://bertoni.netlify.app/",
       "categoria": "Profile / Multi-Language",
       "performance": "96/100 (Lighthouse)",
-      "status": "Aguardandp Conteúdo"
+      "status": "Aguardando Conteúdo"
     },
     {
       "id": 4,
@@ -39,7 +39,7 @@
       "url": "https://dra-adriana.netlify.app/",
       "categoria": "Landing Page / Jurídico",
       "performance": "94/100 (Lighthouse)",
-      "status": "No Ar"
+      "status": "Aguardando Conteúdo"
     },
     {
       "id": 5,
@@ -49,7 +49,7 @@
       "url": "https://gilded-ufc-sound.netlify.app/",
       "categoria": "Landing Page / Automotivo",
       "performance": "99.8% (Estável)",
-      "status": "Disponível"
+      "status": "Demonstração"
     },
     {
       "id": 6,
@@ -59,7 +59,7 @@
       "url": "https://general-motos.netlify.app/",
       "categoria": "Landing Page / Oficina",
       "performance": "98/100 (Core Web Vitals)",
-      "status": "Disponível"
+      "status": "Demonstração"
     }
   ]
 }
